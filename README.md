@@ -2,6 +2,8 @@
 
 A SwiftUI package that provides a fully programmatic, infinitely scrolling stack (vertical or horizontal) with smart prefetching, recycling, and optional pull-to-refresh support. Includes an example calendar demo to showcase usage.
 
+> Repository: https://github.com/itsmeRonjie/InfiniteScrollView
+
 ## Features
 
 - Infinite scrolling in any direction using arbitrary index types.
@@ -15,11 +17,12 @@ A SwiftUI package that provides a fully programmatic, infinitely scrolling stack
 - Swift 5.9+
 - iOS 15 / macOS 12 / tvOS 15 / watchOS 8
 
-## Adding The Package
+## Installation
 
 ### Xcode
+
 1. `File > Add Packages…`
-2. Enter the repository URL and select the branch or tag you want.
+2. Enter `https://github.com/itsmeRonjie/InfiniteScrollView`.
 3. Choose the `InfiniteScrollView` product for your target.
 
 ### Swift Package Manifest
@@ -27,7 +30,7 @@ A SwiftUI package that provides a fully programmatic, infinitely scrolling stack
 // In Package.swift
 let package = Package(
     dependencies: [
-        .package(url: "https://your.git.server/InfiniteScrollView.git", branch: "main")
+        .package(url: "https://github.com/itsmeRonjie/InfiniteScrollView.git", from: "1.0.0")
     ],
     targets: [
         .target(
@@ -87,7 +90,10 @@ struct MonthCard: View {
 - `onCenteredIndexChanged`: Called whenever the view deems a new index centered; use it to update external state.
 
 ## Demo App
-Open the Swift package in Xcode and build the `InfiniteScrollViewDemo` scheme under `Examples/InfiniteScrollViewDemo` to see the infinite calendar in action.
+
+1. Open `Package.swift` in Xcode (or open `InfiniteScrollView.xcodeproj` if you prefer the project file).
+2. Select the `InfiniteScrollViewDemo` scheme and run on any iOS 15+ simulator.
+3. Scroll vertically or horizontally to watch the calendar recycling logic in action; tap “Go to Current Month” to see programmatic centering.
 
 ## License
-MIT (or specify your preferred license here).
+MIT (see [LICENSE](LICENSE) once added to the repository).
