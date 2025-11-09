@@ -22,12 +22,13 @@ jobs:
       - name: Run tests
         run: swift test
 
-      - name: Build iOS simulator slice
+      - name: Build iOS simulator slice (SwiftPM)
         run: |
+          swift package resolve
           xcodebuild \
             -scheme InfiniteScrollView \
             -destination 'platform=iOS Simulator,name=iPhone 15' \
             -sdk iphonesimulator \
             -configuration Debug \
-            -package . \
+            -package-path . \
             build
