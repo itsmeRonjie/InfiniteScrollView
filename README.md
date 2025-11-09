@@ -103,3 +103,7 @@ https://github.com/user-attachments/assets/952e5c22-f342-49ef-b21b-7800ec4a3197
 
 ## License
 MIT — see [LICENSE](LICENSE) for details.
+
+---
+
+Interested in contributing? Check out [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
