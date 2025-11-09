@@ -8,7 +8,7 @@
 import SwiftUI
 
 @main
-struct InfiniteScrollViewApp: App {
+struct InfiniteScrollViewDemoApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
