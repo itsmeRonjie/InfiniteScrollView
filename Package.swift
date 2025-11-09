@@ -19,6 +19,11 @@ let package = Package(
         .target(
             name: "InfiniteScrollView",
             path: "Sources/InfiniteScrollView"
+        ),
+        .testTarget(
+            name: "InfiniteScrollViewTests",
+            dependencies: ["InfiniteScrollView"],
+            path: "Tests/InfiniteScrollViewTests"
         )
     ]
 )
