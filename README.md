@@ -30,7 +30,7 @@ A SwiftUI package that provides a fully programmatic, infinitely scrolling stack
 // In Package.swift
 let package = Package(
     dependencies: [
-        .package(url: "https://github.com/itsmeRonjie/InfiniteScrollView.git", from: "1.0.0")
+        .package(url: "https://github.com/itsmeRonjie/InfiniteScrollView.git", exact: "0.1.0-beta.1")
     ],
     targets: [
         .target(
@@ -97,13 +97,9 @@ struct MonthCard: View {
 
 ## Example Video
 
-
 https://github.com/user-attachments/assets/b0819058-28bf-4f1b-834d-65a10bc60c77
 
-
 https://github.com/user-attachments/assets/952e5c22-f342-49ef-b21b-7800ec4a3197
-
-
 
 ## License
 MIT — see [LICENSE](LICENSE) for details.
