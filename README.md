@@ -96,4 +96,4 @@ struct MonthCard: View {
 3. Scroll vertically or horizontally to watch the calendar recycling logic in action; tap “Go to Current Month” to see programmatic centering.
 
 ## License
-MIT (see [LICENSE](LICENSE) once added to the repository).
+MIT — see [LICENSE](LICENSE) for details.
