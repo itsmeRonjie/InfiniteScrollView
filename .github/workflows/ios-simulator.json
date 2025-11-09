@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "sdk": "iphonesimulator",
+  "destination": "generic/platform=iOS Simulator",
+  "target": "arm64-apple-ios15.0-simulator",
+  "toolchain-bin-dir": "/Applications/Xcode_15.4.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin",
+  "extra-cc-flags": ["-isysroot", "/Applications/Xcode_15.4.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk"],
+  "extra-swiftc-flags": ["-sdk", "/Applications/Xcode_15.4.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk"],
+  "extra-cpp-flags": ["-isysroot", "/Applications/Xcode_15.4.app/Contents/Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator.sdk"]
+}
