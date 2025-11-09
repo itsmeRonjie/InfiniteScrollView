@@ -95,5 +95,15 @@ struct MonthCard: View {
 2. Select the `InfiniteScrollViewDemo` scheme and run on any iOS 15+ simulator.
 3. Scroll vertically or horizontally to watch the calendar recycling logic in action; tap “Go to Current Month” to see programmatic centering.
 
+## Example Video
+
+
+https://github.com/user-attachments/assets/b0819058-28bf-4f1b-834d-65a10bc60c77
+
+
+https://github.com/user-attachments/assets/952e5c22-f342-49ef-b21b-7800ec4a3197
+
+
+
 ## License
 MIT — see [LICENSE](LICENSE) for details.
