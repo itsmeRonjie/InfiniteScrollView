@@ -38,7 +38,7 @@ public struct InfiniteScrollView<Content: View, ChangeIndex: Equatable>: View {
         decreaseIndexAction: @escaping (ChangeIndex) -> ChangeIndex?,
         onCenteredIndexChanged: ((ChangeIndex) -> Void)? = nil,
         stopScrollingOnUpdate: Bool = true,
-        content: @escaping (ChangeIndex) -> Content
+        @ViewBuilder content: @escaping (ChangeIndex) -> Content
     ) {
         self.spacing = spacing
         self.content = content
