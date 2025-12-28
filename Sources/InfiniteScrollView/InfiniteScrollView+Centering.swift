@@ -9,8 +9,22 @@ import SwiftUI
 
 extension InfiniteScrollViewContainer {
     func ensureInitialCentering() {
-        guard !didCenterInitially else { return }
-        didCenterInitially = true
+        guard pendingInitialCentering else { return }
+        attemptInitialCentering()
+    }
+
+    func attemptInitialCentering() {
+        guard pendingInitialCentering else { return }
+        guard initialCenteringAttempts < 3 else {
+            pendingInitialCentering = false
+            pendingProgrammaticTarget = nil
+            return
+        }
+        guard pendingScrollID == nil else { return }
+        guard let target = items.first(where: { $0.index == changeIndex }),
+              let frame = visibleFrames[target.id],
+              !frame.isEmpty else { return }
+        initialCenteringAttempts += 1
         DispatchQueue.main.async {
             centerOn(index: changeIndex, animated: false)
         }
@@ -19,8 +33,20 @@ extension InfiniteScrollViewContainer {
     func handleFrameChanges(_ frames: [UUID: CGRect], viewportSize: CGSize) {
         visibleFrames = frames
         guard !items.isEmpty else { return }
-        maybePrefetch(viewportSize: viewportSize)
-        trimInvisibleItems(viewportSize: viewportSize)
+        attemptInitialCentering()
+        if !pendingInitialCentering {
+            let anchorItem = centeredItem(viewportSize: viewportSize)
+            let firstID = items.first?.id
+            maybePrefetch(viewportSize: viewportSize)
+            trimInvisibleItems(viewportSize: viewportSize)
+            if let anchorItem,
+               items.first?.id != firstID,
+               pendingScrollID == nil,
+               pendingProgrammaticTarget == nil,
+               items.contains(where: { $0.id == anchorItem.id }) {
+                stabilizeScroll(to: anchorItem)
+            }
+        }
         updateCenteredIndex(viewportSize: viewportSize)
     }
 
@@ -71,8 +97,13 @@ extension InfiniteScrollViewContainer {
 
     func updateCenteredIndex(viewportSize: CGSize) {
         guard let target = centeredItem(viewportSize: viewportSize) else { return }
-        let changed = lastReportedIndex != target.index
-        lastReportedIndex = target.index
+        if pendingInitialCentering {
+            if target.index == changeIndex {
+                pendingInitialCentering = false
+            } else {
+                return
+            }
+        }
 
         if let pending = pendingProgrammaticTarget {
             if pending == target.index {
@@ -81,6 +112,9 @@ extension InfiniteScrollViewContainer {
                 return
             }
         }
+
+        let changed = lastReportedIndex != target.index
+        lastReportedIndex = target.index
 
         guard changed else { return }
         if onCenteredIndexChanged != nil {
@@ -111,6 +145,11 @@ extension InfiniteScrollViewContainer {
         if stopScrollingOnUpdate {
             temporarilyDisableScrolling()
         }
+    }
+
+    func stabilizeScroll(to item: ScrollItem) {
+        pendingProgrammaticTarget = item.index
+        scheduleScroll(to: item.id, animated: false)
     }
 
     func rebuildItems(around index: ChangeIndex, animated: Bool) {

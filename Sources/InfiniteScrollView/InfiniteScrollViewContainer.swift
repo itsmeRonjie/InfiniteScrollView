@@ -32,7 +32,8 @@ public struct InfiniteScrollViewContainer<ChangeIndex: Equatable, Content: View>
     @State var isScrollDisabled = false
     @State var suppressChangeIndexReaction = false
     @State var pendingProgrammaticTarget: ChangeIndex?
-    @State var didCenterInitially = false
+    @State var pendingInitialCentering = true
+    @State var initialCenteringAttempts = 0
     
     public init(
         spacing: CGFloat,
