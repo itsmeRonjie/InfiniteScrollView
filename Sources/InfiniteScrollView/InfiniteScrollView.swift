@@ -26,6 +26,7 @@ public struct InfiniteScrollView<Content: View, ChangeIndex: Equatable>: View {
     public let decreaseIndexAction: (ChangeIndex) -> ChangeIndex?
     public var onCenteredIndexChanged: ((ChangeIndex) -> Void)?
     public var stopScrollingOnUpdate: Bool
+    public var scrollsToTop: Bool
 
     public init(
         spacing: CGFloat = 0,
@@ -38,6 +39,7 @@ public struct InfiniteScrollView<Content: View, ChangeIndex: Equatable>: View {
         decreaseIndexAction: @escaping (ChangeIndex) -> ChangeIndex?,
         onCenteredIndexChanged: ((ChangeIndex) -> Void)? = nil,
         stopScrollingOnUpdate: Bool = true,
+        scrollsToTop: Bool = false,
         @ViewBuilder content: @escaping (ChangeIndex) -> Content
     ) {
         self.spacing = spacing
@@ -51,6 +53,7 @@ public struct InfiniteScrollView<Content: View, ChangeIndex: Equatable>: View {
         self.decreaseIndexAction = decreaseIndexAction
         self.onCenteredIndexChanged = onCenteredIndexChanged
         self.stopScrollingOnUpdate = stopScrollingOnUpdate
+        self.scrollsToTop = scrollsToTop
     }
 
     public var body: some View {
@@ -65,6 +68,7 @@ public struct InfiniteScrollView<Content: View, ChangeIndex: Equatable>: View {
             decreaseIndexAction: decreaseIndexAction,
             onCenteredIndexChanged: onCenteredIndexChanged,
             stopScrollingOnUpdate: stopScrollingOnUpdate,
+            scrollsToTop: scrollsToTop,
             content: content
         )
     }
