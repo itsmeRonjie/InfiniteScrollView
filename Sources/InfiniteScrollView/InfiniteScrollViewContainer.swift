@@ -20,6 +20,7 @@ public struct InfiniteScrollViewContainer<ChangeIndex: Equatable, Content: View>
     public let decreaseIndexAction: (ChangeIndex) -> ChangeIndex?
     public let onCenteredIndexChanged: ((ChangeIndex) -> Void)?
     public let stopScrollingOnUpdate: Bool
+    public let scrollsToTop: Bool
     public let content: (ChangeIndex) -> Content
     
     @State private var coordinateSpaceID = UUID()
@@ -44,6 +45,7 @@ public struct InfiniteScrollViewContainer<ChangeIndex: Equatable, Content: View>
         decreaseIndexAction: @escaping (ChangeIndex) -> ChangeIndex?,
         onCenteredIndexChanged: ((ChangeIndex) -> Void)?,
         stopScrollingOnUpdate: Bool,
+        scrollsToTop: Bool = false,
         content: @escaping (ChangeIndex) -> Content
     ) {
         self.spacing = spacing
@@ -56,6 +58,7 @@ public struct InfiniteScrollViewContainer<ChangeIndex: Equatable, Content: View>
         self.decreaseIndexAction = decreaseIndexAction
         self.onCenteredIndexChanged = onCenteredIndexChanged
         self.stopScrollingOnUpdate = stopScrollingOnUpdate
+        self.scrollsToTop = scrollsToTop
         self.content = content
         
         let windowSize = Self.windowSize(for: self.contentMultiplier)
@@ -127,6 +130,7 @@ extension InfiniteScrollViewContainer {
     func scrollBody(viewportSize: CGSize) -> some View {
         ScrollView(orientation.axis, showsIndicators: false) {
             stackContent
+                .scrollsToTopCompat(scrollsToTop)
         }
         .defaultScrollAnchorCompat(.center)
         .scrollDisabledCompat(isScrollDisabled)
